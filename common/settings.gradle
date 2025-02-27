@@ -1,0 +1,22 @@
+rootProject.name = 'stock-trading-platform'
+eeeeeeeeeeeeee
+include 'common'
+include 'service-gateway'
+include 'service-trading'
+include 'service-query'
+
+project(':common') {
+    projectDir = file('common')
+}
+
+project(':service-gateway') {
+    projectDir = file('service-gateway')
+}
+
+project(':service-trading') {
+    projectDir = file('service-trading')
+}
+
+project(':service-query') {
+    projectDir = file('service-query')
+}
