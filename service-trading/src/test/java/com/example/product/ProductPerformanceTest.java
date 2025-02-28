@@ -1,8 +1,6 @@
 package com.example.product;
 
 import com.example.kafka.CreateProductEvent;
-import com.example.product.entity.Product;
-import com.example.product.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;

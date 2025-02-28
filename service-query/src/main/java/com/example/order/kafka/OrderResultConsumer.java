@@ -1,8 +1,6 @@
 package com.example.query.kafka;
 
 import com.example.kafka.*;
-import com.example.query.entity.Order;
-import com.example.query.service.OrderService;
 import com.example.events.EventEntity;
 import com.example.events.EventRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,10 +8,7 @@ lombok.RequiredArgsConstructor;
         lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 
 @Slf4j
 @Service

@@ -1,8 +1,6 @@
-package com.example.product.kafka;
+package com.example.trading.kafka;
 
 import com.example.kafka.*;
-import com.example.product.entity.Product;
-import com.example.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

@@ -1,4 +1,4 @@
-package com.example.product.kafka;
+package com.example.trading.kafka;
 
 import com.example.kafka.Event;
 import lombok.RequiredArgsConstructor;

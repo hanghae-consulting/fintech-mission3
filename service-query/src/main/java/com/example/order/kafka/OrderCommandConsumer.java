@@ -1,8 +1,6 @@
 package com.example.query.kafka;
 
 import com.example.kafka.*;
-import com.example.query.entity.Order;
-import com.example.query.service.OrderService;
 lombok.RequiredArgsConstructor;
         lombok.extern.slf4j.Slf4j;
 import jdk.jfr.Event;
