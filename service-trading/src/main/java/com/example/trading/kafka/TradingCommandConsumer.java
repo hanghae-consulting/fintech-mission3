@@ -1,0 +1,43 @@
+package com.example.trading.kafka;
+
+import com.example.kafka.*;
+import com.example.trading.entity.Trading;
+import com.example.trading.mapper.TradingMapper;
+import com.example.trading.service.TradingService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Service;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class TradingCommandConsumer {
+
+    private final TradingService tradingService;
+    TradingEventProducer eventProducer;
+    TradingMapper mapper;
+
+    @KafkaListener(topics = "trading-command", groupId = "trading-group")
+    public void onCommandEvent(ConsumerRecord<String, Event> record) {
+        log.info("Received record: {}", record);
+        Object event = record.value().getEvent();
+        if (event instanceof CreateTradingEvent) {
+            handleCreateTrading((CreateTradingEvent) event);
+        } else {
+            log.warn("Unknown command event: {}", record);
+        }
+    }
+
+    private void handleCreateTrading(CreateTradingEvent event) {
+        try {
+            log.info("[CommandConsumer] Creating Trading: {}", event);
+            tradingService.createTrading(event);
+            eventProducer.sendResultEvent(mapper.toCreatedEvent(event));
+        } catch (Exception e) {
+            log.error("[CommandConsumer] Error in handleCreateTrading: ", e);
+            // 실패 시 별도 실패 이벤트 발행 가능
+        }
+    }
+}

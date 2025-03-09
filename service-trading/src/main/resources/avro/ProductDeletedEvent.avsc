@@ -1,8 +1,0 @@
-{
-  "type": "record",
-  "name": "ProductDeletedEvent",
-  "namespace": "com.example.kafka",
-  "fields": [
-    { "name": "productId", "type": "string" }
-  ]
-}

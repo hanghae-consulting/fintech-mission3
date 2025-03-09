@@ -1,4 +1,6 @@
 rootProject.name = 'fintech-mission3'
+include 'common'
 include 'service-gateway'
 include 'service-trading'
 include 'service-query'
+
