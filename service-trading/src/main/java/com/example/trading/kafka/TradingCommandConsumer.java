@@ -2,7 +2,6 @@ package com.example.trading.kafka;
 
 import com.example.kafka.*;
 import com.example.trading.entity.Trading;
-import com.example.trading.mapper.TradingMapper;
 import com.example.trading.service.TradingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +16,6 @@ public class TradingCommandConsumer {
 
     private final TradingService tradingService;
     TradingEventProducer eventProducer;
-    TradingMapper mapper;
 
     @KafkaListener(topics = "trading-command", groupId = "trading-group")
     public void onCommandEvent(ConsumerRecord<String, Event> record) {
@@ -33,8 +31,17 @@ public class TradingCommandConsumer {
     private void handleCreateTrading(CreateTradingEvent event) {
         try {
             log.info("[CommandConsumer] Creating Trading: {}", event);
-            tradingService.createTrading(event);
-            eventProducer.sendResultEvent(mapper.toCreatedEvent(event));
+            Trading trading = tradingService.createTrading(event);
+            TradingCreatedEvent createdEvent = new TradingCreatedEvent(
+                    trading.getId(),
+                    trading.getTradingId(),
+                    trading.getStockSymbol(),
+                    trading.getQuantity(),
+                    trading.getPrice(),
+                    event.getTradeTime(),
+                    trading.getTradeType()
+            );
+            eventProducer.sendResultEvent(createdEvent);
         } catch (Exception e) {
             log.error("[CommandConsumer] Error in handleCreateTrading: ", e);
             // 실패 시 별도 실패 이벤트 발행 가능

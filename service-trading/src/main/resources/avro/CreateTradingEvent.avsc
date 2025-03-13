@@ -4,7 +4,6 @@
   "namespace": "com.example.kafka",
   "fields": [
     { "name": "id", "type": "long" },
-    { "name": "tradingId", "type": "string" },
     { "name": "stockSymbol", "type": "string" },
     { "name": "quantity", "type": "int" },
     { "name": "price", "type": { "type": "bytes", "logicalType": "decimal", "precision": 10, "scale": 2 } },
