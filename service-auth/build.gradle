@@ -1,0 +1,52 @@
+plugins {
+    id 'org.springframework.boot'
+    id 'com.github.davidmc24.gradle.plugin.avro' version '1.9.1' // 아브로 플러그인 추가
+}
+
+springBoot {
+    mainClass.set('com.example.ProductApplication') // 실제 메인 클래스 경로 지정
+}
+
+bootJar {
+    archiveFileName = 'service-product.jar'
+}
+
+generateAvroJava { // 아브로 스키마 생성
+    source("src/main/resources/avro")
+    include("**/*.avsc")
+}
+
+repositories {
+    maven {
+        url 'https://packages.confluent.io/maven/' // 아브로 레포지토리 추가
+    }
+}
+
+dependencies {
+    // Spring Boot Starter Web (REST API 구현을 위한)
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Spring Boot Starter Data JPA (MySQL 사용을 위한)
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Spring Boot Starter Security (인증과 권한 관리)
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // Spring Session Redis (세션 관리)
+    implementation 'org.springframework.session:spring-session-data-redis'
+
+    // Redis 클라이언트 (Spring Data Redis)
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // MySQL 커넥터
+    implementation 'com.mysql:mysql-connector-j'
+
+    // Spring Boot Starter Validation (필수 입력 값 검증 등)
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Spring Boot DevTools (개발 환경에서 hot reload 등을 지원)
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // 테스트 의존성
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}

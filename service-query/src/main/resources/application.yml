@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: 8081
   servlet:
     session:
       cookie:
@@ -46,5 +46,3 @@ spring:
 jwt:
   secret: 46930c6e2098076c2ffdc8f1de5d7095debe589eea5b0f43819599a3749d88e26fff284659a26f4baecffc1e7ba574d24d4da5164bf2cf21670ce983d58eb91c
   expirationMs: 86400000
-
-

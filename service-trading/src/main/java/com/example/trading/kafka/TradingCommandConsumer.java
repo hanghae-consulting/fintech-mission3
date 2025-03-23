@@ -1,7 +1,7 @@
 package com.example.trading.kafka;
 
 import com.example.kafka.*;
-import com.example.trading.entity.Trading;
+import com.example.entity.Trading;
 import com.example.trading.service.TradingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

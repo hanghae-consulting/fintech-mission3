@@ -1,8 +1,8 @@
 package com.example.trading.service;
 
 import com.example.kafka.CreateTradingEvent;
-import com.example.trading.entity.Trading;
-import com.example.trading.repository.TradingRepository;
+import com.example.entity.Trading;
+import com.example.repository.TradingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

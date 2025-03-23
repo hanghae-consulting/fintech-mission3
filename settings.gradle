@@ -3,4 +3,4 @@ include 'common'
 include 'service-gateway'
 include 'service-trading'
 include 'service-query'
-
+include 'service-auth'

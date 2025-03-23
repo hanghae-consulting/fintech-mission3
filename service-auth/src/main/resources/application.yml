@@ -1,9 +1,9 @@
 server:
-  port: 8080
+  port: 8100
 
 spring:
   application:
-    name: service-trading
+    name: service-auth
 
   datasource:
     url: jdbc:mysql://localhost:3306/test
@@ -14,9 +14,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-
-  kafka:
-    bootstrap-servers: localhost:10000,localhost:10001,localhost:10002
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: true
 
   data:
     redis:
@@ -33,3 +34,8 @@ spring:
           max-active: 8
           max-idle: 8
           min-idle: 0
+  session:
+    store-type: redis
+    redis:
+      namespace: "spring:session"
+    timeout: 3600  # Session expiration time (seconds)

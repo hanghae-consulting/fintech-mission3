@@ -1,6 +1,6 @@
 package com.example.query.service;
 
-import com.example.entity.Trade;
+import com.example.entity.Trading;
 import com.example.query.entity.StockHolding;
 import com.example.query.repository.StockHoldingRepository;
 import com.example.repository.TradingRepository;
@@ -19,7 +19,7 @@ public class StockQueryService {
         return stockHoldingRepository.findByStockSymbol(stockSymbol);
     }
 
-    public List<Trade> getTradingHistory(String stockSymbol) {
+    public List<Trading> getTradingHistory(String stockSymbol) {
         return tradingRepository.findByStockSymbol(stockSymbol);
     }
 }

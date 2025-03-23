@@ -1,10 +1,10 @@
 package com.example.query.controller;
 
+import com.example.entity.Trading;
 import com.example.query.entity.StockHolding;
 import com.example.query.service.StockQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import com.example.entity.Trade;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class StockQueryController {
     }
 
     @GetMapping("/history")
-    public List<Trade> getTradeHistory(@RequestParam String symbol) {
+    public List<Trading> getTradeHistory(@RequestParam String symbol) {
         return stockQueryService.getTradingHistory(symbol);
     }
 }
