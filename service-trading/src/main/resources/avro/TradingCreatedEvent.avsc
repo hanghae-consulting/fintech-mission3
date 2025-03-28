@@ -7,7 +7,7 @@
     { "name": "tradingId", "type": "string" },
     { "name": "stockSymbol", "type": "string" },
     { "name": "quantity", "type": "int" },
-    { "name": "price", "type": { "type": "bytes", "logicalType": "decimal", "precision": 10, "scale": 2 } },
+    { "name": "price", "type": "string" },
     { "name": "tradeTime", "type": { "type": "long", "logicalType": "timestamp-millis" } },
     { "name": "tradeType", "type": "string" }
   ]

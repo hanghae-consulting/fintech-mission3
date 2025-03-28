@@ -17,8 +17,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "users",
         uniqueConstraints = {
-            @UniqueConstraint(columnNames = "username"),
-            @UniqueConstraint(columnNames = "email")
+                @UniqueConstraint(columnNames = "username"),
+                @UniqueConstraint(columnNames = "email")
         })
 public class User implements Serializable {
 
@@ -40,10 +40,10 @@ public class User implements Serializable {
     @NotBlank
     @Size(max = 120)
     private String password;
-    
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
-    
+
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 

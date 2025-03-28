@@ -3,11 +3,10 @@
   "name": "CreateTradingEvent",
   "namespace": "com.example.kafka",
   "fields": [
-    { "name": "id", "type": "long" },
+    { "name": "userId", "type": "string" },
     { "name": "stockSymbol", "type": "string" },
     { "name": "quantity", "type": "int" },
-    { "name": "price", "type": { "type": "bytes", "logicalType": "decimal", "precision": 10, "scale": 2 } },
-    { "name": "tradeTime", "type": { "type": "long", "logicalType": "timestamp-millis" } },
+    { "name": "price", "type": "string" },
     { "name": "tradeType", "type": "string" }
   ]
 }

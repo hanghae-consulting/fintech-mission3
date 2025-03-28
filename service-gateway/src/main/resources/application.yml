@@ -15,8 +15,8 @@ spring:
           uri: http://localhost:8080
           predicates:
             - Path=/api/trading/**
-          filters:
-            - AuthenticationFilter
+#          filters:
+#            - AuthenticationFilter
         - id: service-query
           uri: http://localhost:8081
           predicates:

@@ -3,6 +3,7 @@ package com.example.trading.kafka;
 import com.example.kafka.*;
 import com.example.entity.Trading;
 import com.example.trading.service.TradingService;
+import com.example.utils.InstantConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -38,7 +39,7 @@ public class TradingCommandConsumer {
                     trading.getStockSymbol(),
                     trading.getQuantity(),
                     trading.getPrice(),
-                    event.getTradeTime(),
+                    InstantConverter.convertLocalDateTimeToInstant(trading.getTradeTime()),
                     trading.getTradeType()
             );
             eventProducer.sendResultEvent(createdEvent);

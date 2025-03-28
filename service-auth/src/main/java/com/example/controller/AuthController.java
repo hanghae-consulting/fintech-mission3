@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
 
@@ -36,44 +36,30 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, HttpSession session) {
-        log.info("Login attempt for user: {}", loginRequest.getUsername());
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpSession session) {
+        Optional<User> user = userService.authenticateUser(loginRequest.getUsername(), loginRequest.getPassword());
 
-        User user = userService.authenticateUser(loginRequest.getUsername(), loginRequest.getPassword())
-                .orElse(null);
+        if (user.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new MessageResponse("Invalid username or password"));
+        }
 
-        if (user == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(new MessageResponse("Invalid username or password!"));
+        userService.createUserSession(session, user.get());
 
-        userService.createUserSession(session, user);
-
-        return ResponseEntity.ok(new UserInfoResponse(
-                user.getId(),
-                user.getUsername(),
-                user.getEmail()
-        ));
+        return ResponseEntity.ok(new MessageResponse("User logged in successfully!"));
     }
 
     @GetMapping("/validate")
     public ResponseEntity<?> validateSession(HttpSession session) {
-        log.debug("Session validation request received");
-
         if (userService.validateSession(session)) {
-            Long userId = (Long) session.getAttribute("AUTHENTICATED_USER");
-            String username = (String) session.getAttribute("USERNAME");
-
-            log.info("Session is valid for user: {}", username);
             return ResponseEntity.ok(new MessageResponse("Session is valid"));
         }
-        log.info("Invalid session");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-        .body(new MessageResponse("Session is invalid or expired"));
+                .body(new MessageResponse("Session is invalid or expired"));
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logoutUser(HttpSession session) {
-        log.info("Logout request received");
-
+    public ResponseEntity<?> logout(HttpSession session) {
         session.invalidate();
         return ResponseEntity.ok(new MessageResponse("User logged out successfully!"));
     }

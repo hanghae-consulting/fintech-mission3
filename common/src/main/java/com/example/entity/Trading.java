@@ -22,11 +22,11 @@ public class Trading {
     private String tradingId;
     private String stockSymbol;
     private int quantity;
-    private BigDecimal price;
+    private String price;
     private LocalDateTime tradeTime;
     private String tradeType; // "BUY" or "SELL"
 
-    public Trading(String stockSymbol, int quantity, BigDecimal price, String tradeType) {
+    public Trading(String stockSymbol, int quantity, String price, String tradeType) {
         this.tradingId = UUID.randomUUID().toString();
         this.stockSymbol = stockSymbol;
         this.quantity = quantity;

@@ -2,10 +2,12 @@ package com.example.trading.kafka;
 
 import com.example.kafka.Event;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class TradingEventProducer {
@@ -17,6 +19,7 @@ public class TradingEventProducer {
     private static final String RESULT_TOPIC = "trading-result";
 
     public void sendCommandEvent(Object event) {
+        log.info("Sending command event: {}", event);
         kafkaTemplate.send(COMMAND_TOPIC, new Event(event.getClass().getName(), event));
     }
 
