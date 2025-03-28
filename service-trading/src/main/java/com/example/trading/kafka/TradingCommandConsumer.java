@@ -4,6 +4,7 @@ import com.example.kafka.*;
 import com.example.entity.Trading;
 import com.example.trading.service.TradingService;
 import com.example.utils.InstantConverter;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class TradingCommandConsumer {
 
     private final TradingService tradingService;
@@ -31,7 +32,7 @@ public class TradingCommandConsumer {
 
     private void handleCreateTrading(CreateTradingEvent event) {
         try {
-            log.info("[CommandConsumer] Creating Trading: {}", event);
+            log.info("[CommandConsumer] CreateTradingEvent: {}", event);
             Trading trading = tradingService.createTrading(event);
             TradingCreatedEvent createdEvent = new TradingCreatedEvent(
                     trading.getId(),

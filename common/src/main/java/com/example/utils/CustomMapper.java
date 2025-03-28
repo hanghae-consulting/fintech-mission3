@@ -2,6 +2,7 @@ package com.example.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 public final class CustomMapper {
 
@@ -13,6 +14,7 @@ public final class CustomMapper {
     // private 생성자를 사용해 외부에서 인스턴스 생성을 막음
     private CustomMapper() {
         this.objectMapper = new ObjectMapper();
+        this.objectMapper.registerModule(new JavaTimeModule()); // ✅ JavaTimeModule 등록
     }
 
     // 인스턴스 접근 메서드

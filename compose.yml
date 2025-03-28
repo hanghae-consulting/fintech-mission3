@@ -119,6 +119,7 @@ services:
       SCHEMA_REGISTRY_KAFKASTORE_REPLICATION_FACTOR: 3
       SCHEMA_REGISTRY_KAFKASTORE_TOPIC_CONFIGS: cleanup.policy=compact
       SCHEMA_REGISTRY_CONFIG_DELETE_ENABLE: "true"
+      SCHEMA_REGISTRY_COMPATIBILITY_LEVEL: FULL  # 🚀 FULL 호환성 적용
     depends_on:
       - kafka00
       - kafka01

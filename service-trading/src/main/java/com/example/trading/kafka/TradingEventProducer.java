@@ -19,11 +19,11 @@ public class TradingEventProducer {
     private static final String RESULT_TOPIC = "trading-result";
 
     public void sendCommandEvent(Object event) {
-        log.info("Sending command event: {}", event);
         kafkaTemplate.send(COMMAND_TOPIC, new Event(event.getClass().getName(), event));
     }
 
     public void sendResultEvent(Object event) {
+        log.info(RESULT_TOPIC + ": " + event);
         kafkaTemplate.send(RESULT_TOPIC, new Event(event.getClass().getName(), event));
     }
 }
