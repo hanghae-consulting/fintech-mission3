@@ -5,6 +5,7 @@ import com.example.events.EventRepository;
 import com.example.kafka.*;
 import com.example.utils.CustomMapper;
 import com.example.utils.TimeUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -33,16 +34,17 @@ public class TradingResultConsumer {
 
     private void handleCreatedTrading(TradingCreatedEvent event) {
         try {
-            log.info("[CommandConsumer] Creating Trading: {}", event);
+            ObjectMapper mapper = new ObjectMapper();
+            log.info("[ResultConsumer] TradingCreatedEvent: {}", event);
             eventRepository.save(new EventEntity(
                     event.getId(),
-                    "TradingCreatedEvent",
-                    CustomMapper.getInstance().convertToJson(event),
+                    event.getClass().getName(),
+                    event.toString(),
                     timeUtil.getCurrentTime(),
                     "SUCCESS"
             ));
         } catch (Exception e) {
-            log.error("[CommandConsumer] Error in handleCreatedTrading: ", e);
+            log.error("[ResultConsumer] Error in handleCreatedTrading: ", e);
             // 실패 시 별도 실패 이벤트 발행 가능
         }
     }

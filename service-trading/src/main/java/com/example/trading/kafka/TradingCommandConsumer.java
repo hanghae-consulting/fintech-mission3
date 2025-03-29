@@ -11,6 +11,8 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
+import java.time.format.DateTimeFormatter;
+
 @Slf4j
 @Service
 @AllArgsConstructor
@@ -32,6 +34,8 @@ public class TradingCommandConsumer {
 
     private void handleCreateTrading(CreateTradingEvent event) {
         try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
             log.info("[CommandConsumer] CreateTradingEvent: {}", event);
             Trading trading = tradingService.createTrading(event);
             TradingCreatedEvent createdEvent = new TradingCreatedEvent(
@@ -40,7 +44,7 @@ public class TradingCommandConsumer {
                     trading.getStockSymbol(),
                     trading.getQuantity(),
                     trading.getPrice(),
-                    InstantConverter.convertLocalDateTimeToInstant(trading.getTradeTime()),
+                    trading.getTradeTime().format(formatter),
                     trading.getTradeType()
             );
             eventProducer.sendResultEvent(createdEvent);

@@ -31,7 +31,7 @@ dependencies {
     implementation 'org.redisson:redisson-spring-boot-starter:3.27.0'
     // Spring Boot Starter Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.0'
     // Lombok (선택)
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
